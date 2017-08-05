@@ -36,11 +36,9 @@ def score(game):
     return result
 
 def get_value(char):
-    my_chars = "123456789"
-    my_chars2 = "X/"
-    if char in my_chars:
+    if char.isdigit():
         return int(char)
-    if char in my_chars2:
+    if char in "X/":
         return 10
     elif char == '-':
         return 0
