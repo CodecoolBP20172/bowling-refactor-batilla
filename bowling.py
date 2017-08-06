@@ -5,7 +5,7 @@ def score(game):
     in_first_half = True
     for i in range(len(game)):
         if game[i] == '/':
-            result += spare(game, i)
+            result += 10 - last
         else:
             result += get_value(game[i])
         if frame < 10  and get_value(game[i]) == 10:
@@ -18,23 +18,12 @@ def score(game):
                 else:
                     result += get_value(game[i+2])
         last = get_value(game[i])
-        if not in_first_half:
+        if not in_first_half or game[i] == 'X':
             frame += 1
-        if in_first_half == True:
-            in_first_half = False
+            in_first_half = True
         else:
-            in_first_half = True
-        if game[i] == 'X':
-            in_first_half = True
-            frame += 1
+            in_first_half = False
     return result
-
-
-def spare(game, i):
-    if game[i] == '/':
-        return (10 - get_value(game[i-1]))
-    else:
-        return get_value(game[i])
 
 
 def get_value(char):
@@ -46,6 +35,3 @@ def get_value(char):
         return 0
     else:
         raise ValueError()
-
-
-print(score("1/35XXX458/X3/23"))
