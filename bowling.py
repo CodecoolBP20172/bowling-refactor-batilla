@@ -5,10 +5,9 @@ def score(game):
     in_first_half = True
     for i in range(len(game)):
         if game[i] == '/':
-            result += 10 - last
+            result += spare(game, i)
         else:
             result += get_value(game[i])
-            print(result)
         if frame < 10  and get_value(game[i]) == 10:
             if game[i] == '/':
                 result += get_value(game[i+1])
@@ -29,6 +28,14 @@ def score(game):
             in_first_half = True
             frame += 1
     return result
+
+
+def spare(game, i):
+    if game[i] == '/':
+        return (10 - get_value(game[i-1]))
+    else:
+        return get_value(game[i])
+
 
 def get_value(char):
     if char.isdigit():
