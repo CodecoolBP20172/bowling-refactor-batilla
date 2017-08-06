@@ -5,10 +5,7 @@ def score(game):
     in_first_half = True
     # ______
     for trow in range(len(game)):
-        if game[trow] == '/':
-            result += 10 - last
-        else:
-            result += get_value(game[trow])
+        result += check_scorcard(game, trow)
         if frame < 10  and get_value(game[trow]) == 10:
             if game[trow] == '/':
                 result += check_scorcard(game, trow)
@@ -31,7 +28,8 @@ def score(game):
 def check_scorcard(game, trow):
     if game[trow] == '/':
         return (10 - get_value(game[trow-1]))
-
+else:
+        return get_value(game[trow])
 
 def get_value(char):
     if char.isdigit():
